@@ -1,22 +1,20 @@
 <?php
-if (isset($_POST['output'])){
-    header("Location: output.php");
-} elseif (isset($_POST['books'])){
-    header("Location: books.php");
-} elseif (isset($_POST['authors'])){
-    header("Location: authors.php");
-} elseif (isset($_POST['readers'])){
-    header("Location: readers.php");
-} elseif (isset($_POST['languages'])){
-    header("Location: languages.php");
-} elseif (isset($_POST['publishers'])){
-    header("Location: publishers.php");
-} elseif (isset($_POST['countries'])){
-    header("Location: countries.php");
-} elseif (isset($_POST['debtors'])){
-    header("Location: debtors.php");
+if (isset($_POST['registration'])){
+    header("Location: tables/registration.php");
+} elseif (isset($_POST['clienty'])){
+    header("Location: tables/dveri.php");
+} elseif (isset($_POST['nomera'])){
+    header("Location: tables/otdel.php");
+} elseif (isset($_POST['class'])){
+    header("Location: tables/dolzhnost.php");
+} elseif (isset($_POST['sotrudniki'])){
+    header("Location: tables/sotrudnik.php");
+} elseif (isset($_POST['dolzhnost'])){
+    header("Location: tables/dolzhnost.php");
+} elseif (isset($_POST['svobodnie'])){
+    header("Location: tables/svobodnie.php");
 } elseif (isset($_POST['popular'])){
-    header("Location: popular.php");
+    header("Location: tables/otkritie.php");
 }
 ?>
 <!DOCTYPE>
@@ -28,21 +26,32 @@ if (isset($_POST['output'])){
 </head>
 <body>
 <div class="container">
-    <form method="post">
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Shortcuts</a></li>
+                <li><a href="#">Overview</a></li>
+                <li><a href="#">Events</a></li>
+            </ul>
+        </div>
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+        </div>
+    </div>
+    <!--<form method="post">
         <div class="list">
-            <button name="output" type="submit" class="btn btn-default">Выдача книг</button>
-            <button name="books" type="submit" class="btn btn-default">Книги</button>
-            <button name="authors" type="submit" class="btn btn-default">Авторы</button>
-            <button name="readers" type="submit" class="btn btn-default">Читатели</button>
-            <button name="languages" type="submit" class="btn btn-default">Языки</button>
-            <button name="publishers" type="submit" class="btn btn-default">Издательства</button>
-            <button name="countries" type="submit" class="btn btn-default">Страны</button>
+            <button name="registration" type="submit" class="btn btn-default">Регистрация</button>
+            <button name="clienty" type="submit" class="btn btn-default">Клиенты</button>
+            <button name="nomera" type="submit" class="btn btn-default">Номера</button>
+            <button name="class" type="submit" class="btn btn-default">Классы номеров</button>
+            <button name="sotrudniki" type="submit" class="btn btn-default">Сотрудники</button>
+            <button name="dolzhnost" type="submit" class="btn btn-default">Должности</button>
+            <button name="svobodnie" type="submit"  class="btn btn-default" style="margin-top: 50px;">Свободные номера</button>
+            <button name="popular" type="submit" class="btn btn-default">Популярные номера месяца</button>
         </div>
-        <div class="report">
-            <button name="debtors" type="submit"  class="btn btn-default">Должники</button>
-            <button name="popular" type="submit" class="btn btn-default">Популярные книги этого месяца</button>
-        </div>
-    </form>
+    </form>-->
 
     
 </div>
