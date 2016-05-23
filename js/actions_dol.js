@@ -2,16 +2,18 @@ $(document).ready(function() {
     //DELETE
     $('input[name="delete"]').on('click',function (){
         var id = $(this).closest('tr').data('id');
+        var table = "dolzhnost";
+        var ident = "id";
         $.ajax({
-            url:'delete_out.php',
+            url:'../delete.php',
             method:'POST',
-            data: 'id=' + id,
+            data: 'id=' + id + '&table=' + table + '&ident=' + ident,
             type: 'Json',
             success: function(data){
                 data = jQuery.parseJSON(data);
                 if(data.status=='success'){
-                    $(this).closest('tr').remove();
-                } else {//NEVEDOMAYA HUJNYA
+                    $("tr[data-id='" + id +"']").remove();
+                } else {
                     $("#errorModal").modal("show");
                 }
             }
@@ -19,16 +21,11 @@ $(document).ready(function() {
     });
     //ADD
     $('button[name=add]').on('click', function(){
-        var odate = $('input#inputOdate').val();
-        var rdate= $('input#inputRdate').val();
-        var book = $('input#inputBook').val();
-        //var author = $('input#inputAuthor').val();
-        var fname = $('input#inputFname').val();
-        var sname = $('input#inputSname').val();
+        var dol = $('input#inputDol').val();
         $.ajax({
-            url:'add_out.php',
+            url:'../add_dol.php',
             method:'post',
-            data:'odate=' + odate + '&rdate=' + rdate + '&book=' + book + '&fname=' + fname + '&sname=' + sname,
+            data:'dol=' + dol,
             type:'json',
             success:function(data){
                 $("#addModal").modal("hide");
@@ -38,20 +35,21 @@ $(document).ready(function() {
     //EDIT
     $('button[name=edit]').on('click', function(){
         var id = $(this).closest('tr').data('id');
-        var country = $(this).closest('tr').data('country');
-        $('#editModal').attr('data-id',id,'data-country',country);
-        $('input[name="country"]').val(country);
+        var dol = $(this).closest('tr').data('dol');
+        $('#editModal').attr('data-id',id);
+        $('#editModal').attr('data-dol',dol);
+        $('input[name="dol"]').val(dol);
     });
     $('button[name=save]').on('click', function(){
         var id = $('#editModal').data('id');
-        var country = $('#editModal input[name="country"]').val();
+        var dol = $('#editModal input[name="dol"]').val();
         $.ajax({
-            url:'update_out.php',
-            method:'post',
-            data:'id=' + id + '&country=' + country,
+            url:'../update_dol.php',
+            method:'POST',
+            data:'id=' + id + '&dol=' + dol,
             type:'json',
             success:function(data){
-                $("#addModal").modal("hide");
+                $("#editModal").modal("hide");
             }
         });
     });

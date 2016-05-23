@@ -2,16 +2,18 @@ $(document).ready(function() {
     //DELETE
     $('input[name="delete"]').on('click',function (){
         var id = $(this).closest('tr').data('id');
+        var table = "otdel";
+        var ident = "id";
         $.ajax({
-            url:'delete_country.php',
+            url:'../delete.php',
             method:'POST',
-            data: 'id=' + id,
+            data: 'id=' + id + '&table=' + table + '&ident=' + ident,
             type: 'Json',
             success: function(data){
                 data = jQuery.parseJSON(data);
                 if(data.status=='success'){
-                    $(this).closest('tr').remove();
-                } else {//NEVEDOMAYA HUJNYA
+                    $("tr[data-id='" + id +"']").remove();
+                } else {
                     $("#errorModal").modal("show");
                 }
             }
@@ -19,11 +21,11 @@ $(document).ready(function() {
     });
     //ADD
     $('button[name=add]').on('click', function(){
-        var country = $('input#inputCountry').val();
+        var otdel = $('input#inputOtdel').val();
         $.ajax({
-            url:'add_country.php',
+            url:'../add_otdel.php',
             method:'post',
-            data:'country=' + country,
+            data:'otdel=' + otdel,
             type:'json',
             success:function(data){
                 $("#addModal").modal("hide");
@@ -33,20 +35,21 @@ $(document).ready(function() {
     //EDIT
     $('button[name=edit]').on('click', function(){
         var id = $(this).closest('tr').data('id');
-        var country = $(this).closest('tr').data('country');
-        $('#editModal').attr('data-id',id,'data-country',country);
-        $('input[name="country"]').val(country);
+        var otdel = $(this).closest('tr').data('otdel');
+        $('#editModal').attr('data-id',id);
+        $('#editModal').attr('data-otdel',otdel);
+        $('input[name="otdel"]').val(otdel);
     });
     $('button[name=save]').on('click', function(){
         var id = $('#editModal').data('id');
-        var country = $('#editModal input[name="country"]').val();
+        var otdel = $('#editModal input[name="otdel"]').val();
         $.ajax({
-            url:'update_country.php',
-            method:'post',
-            data:'id=' + id + '&country=' + country,
+            url:'../update_otdel.php',
+            method:'POST',
+            data:'id=' + id + '&otdel=' + otdel,
             type:'json',
             success:function(data){
-                $("#addModal").modal("hide");
+                $("#editModal").modal("hide");
             }
         });
     });
